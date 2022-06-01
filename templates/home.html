@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Classification Tool</title>
+
+  <style>
+      /* Styles */
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>Image Classification </span></h1>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input class="custom-file-upload" type="file" accept="image" name="image" id="file" />
+    <button class="compress_image" type="submit" id="submitBtn">Classify Image</button>
+  </form>
+
+  <div class="m">
+      <p>{{ status }}</p>
+  </div>
+
+
+
+  <div class="container">
+    <div class="image_container">
+      <div class="wrapper">
+
+        <img src="{% if image.name %}{{ image_url }}{% else %}{% static 'images/default.png' %}{% endif %}"
+          alt="Image" width="800px" height="400px" />
+
+        <div class="info_container">
+          <ul>
+            <li>Name: <span class="name">{{ image.name }}</span></li>
+            <li>Class: <span class="type">{{ output }}</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+
+</body>
+
+</html>
